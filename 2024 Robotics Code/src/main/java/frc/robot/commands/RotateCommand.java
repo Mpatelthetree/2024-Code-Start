@@ -16,7 +16,6 @@ public class RotateCommand extends CommandBase {
     // Use addRequirements() here to declare subsystem dependencies.
       _mecDrive = mec;
       addRequirements(_mecDrive);
-    }
   }
 
   // Called when the command is initially scheduled.

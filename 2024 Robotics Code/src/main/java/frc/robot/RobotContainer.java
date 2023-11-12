@@ -5,12 +5,10 @@
 package frc.robot;
 
 import frc.robot.Constants.OperatorConstants;
-import frc.robot.commands.Autos;
-import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.RotateCommand;
 import frc.robot.commands.SwerveMoveCommand;
-import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.MecDrive;
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
@@ -23,7 +21,7 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-  private final CommandXboxController m_driverController = new CommandXboxController(OperatorConstants.kDriverControllerPort);
+  private final XboxController m_driverController = new XboxController(OperatorConstants.kDriverControllerPort);
 
   private final MecDrive m_MecDrive = new MecDrive();
   private final SwerveMoveCommand c_SwerveMove = new SwerveMoveCommand(m_MecDrive);
@@ -31,8 +29,16 @@ public class RobotContainer {
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
   
-  Trigger xboxLeftJoystick = m_driverController.leftStick();
-  Trigger xboxRightJoystick = m_driverController.rightStick(); 
+  XboxController xboxLeftJoystick = m_driverController.leftStick();
+  XboxController xboxRightJoystick = m_driverController.rightStick(); 
+
+  public double getLeftJoyStickXAxis() {
+    return xboxLeftJoystick.getLeftX();
+  }
+  public double getLeftJoyStickYAxis() {
+    return xboxLeftJoystick.getLeftY();
+  }
+
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -50,12 +56,11 @@ public class RobotContainer {
    * joysticks}.
    */
   private void configureBindings() {
-    // Schedule `ExampleCommand` when `exampleCondition` changes to `true`
-    
-    // Schedule `exampleMethodCommand` when the Xbox controller's B button is pressed,
-    // cancelling on release.
-    m_driverController.axisGreaterThan(Constants.xboxLeftJoystick, 0).whileTrue(c_SwerveMove);
-    m_driverController.axisLessThan(Constants.xboxRightJoystick, 0).whileTrue(c_Rotate);
+    m_driverController.axisGreaterThan(Constants.xboxLeftJoystickX, 0, null)
+    m_driverController.axisLessThan(Constants.xboxLeftJoystickY, 0,null).whileTrue(c_SwerveMove);
+
+    m_driverController.axisGreaterThan(Constants.xboxRightJoystickX, 0,null).whileTrue(c_Rotate);
+    m_driverController.axisLessThan(Constants.xboxRightJoystickX, 0,null).whileTrue(c_Rotate);
   }
 
   /**

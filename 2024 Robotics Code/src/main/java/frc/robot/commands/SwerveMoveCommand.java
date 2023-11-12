@@ -6,6 +6,8 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.smartdashboard.Mechanism2d;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants;
+import frc.robot.Robot;
 import frc.robot.subsystems.MecDrive;
 
 public class SwerveMoveCommand extends CommandBase {
@@ -16,7 +18,6 @@ public class SwerveMoveCommand extends CommandBase {
     // Use addRequirements() here to declare subsystem dependencies.
       _mecDrive = mec;
       addRequirements(_mecDrive);
-    }
   }
 
   // Called when the command is initially scheduled.
@@ -26,9 +27,9 @@ public class SwerveMoveCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    double StickY = Robot.m_robotContainer.GetDriverRawAxis(Constants.STICK_Y);
+    double xboxLeftJoystickAxis = Robot.m_robotContainer.getLeftJoyStickAxis(Constants.xboxLeftJoystick);
     
-    _mecDrive.SetMotors();
+    //_mecDrive.SetMotors();
  
   }
 

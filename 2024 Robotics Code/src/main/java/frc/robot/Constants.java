@@ -21,7 +21,8 @@ public final class Constants {
   public static final int topLeftMecWheel = 2;
   public static final int bottomRightMecWheel = 3;
   public static final int bottomLeftMechWheel = 4;
-  public static final int xboxLeftJoystick = 0;
-  public static final int xboxRightJoystick = 0;
-  
+  public static final int xboxLeftJoystickX = 0;
+  public static final int xboxLeftJoystickY = 1;
+  public static final int xboxRightJoystickX = 4;
+  public static final int xboxRightJoystickY = 5;
 }
